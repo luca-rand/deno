@@ -5,16 +5,32 @@ interface ParseOptions {
   maxKeys?: number;
 }
 
+export interface ParsedUrlQuery {
+  [key: string]: string | string[];
+}
+
+export interface ParsedUrlQueryInput {
+  [key: string]:
+    | string
+    | number
+    | boolean
+    | string[]
+    | number[]
+    | boolean[]
+    | undefined
+    | null;
+}
+
 export function parse(
   str: string,
   sep = "&",
   eq = "=",
   { decodeURIComponent = unescape, maxKeys = 1000 }: ParseOptions = {}
-): { [key: string]: string[] | string } {
+): ParsedUrlQuery {
   const entries = str
     .split(sep)
     .map(entry => entry.split(eq).map(decodeURIComponent));
-  const final: { [key: string]: string[] | string } = {};
+  const final: ParsedUrlQuery = {};
 
   let i = 0;
   while (true) {
@@ -43,6 +59,7 @@ interface StringifyOptions {
   encodeURIComponent?: (string: string) => string;
 }
 
+// TODO: Make stringify take a ParsedUrlQueryInput instead of a object (https://github.com/DefinitelyTyped/DefinitelyTyped/blob/ee646ad6a1cd47f71f099c0a03686d8f3547f3b0/types/node/querystring.d.ts#L17)
 export function stringify(
   obj: object,
   sep = "&",

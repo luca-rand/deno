@@ -36,7 +36,7 @@ deno standard library as it's a compatiblity module.
 - [x] timers
 - [ ] tls
 - [ ] tty
-- [ ] url
+- [x] url
 - [x] util _partly_
 - [ ] ~~v8~~ _can't implement_
 - [ ] vm
