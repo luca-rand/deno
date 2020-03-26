@@ -28,6 +28,7 @@ import * as nodeTimers from "./timers.ts";
 import * as nodeOs from "./os.ts";
 import * as nodeEvents from "./events.ts";
 import * as nodeQueryString from "./querystring.ts";
+import * as nodeUrl from "./url.ts";
 
 import * as path from "../path/mod.ts";
 import { assert } from "../testing/asserts.ts";
@@ -598,6 +599,7 @@ nativeModulePolyfill.set(
   "querystring",
   createNativeModule("querystring", nodeQueryString)
 );
+nativeModulePolyfill.set("url", createNativeModule("url", nodeUrl));
 
 function loadNativeModule(
   _filename: string,
