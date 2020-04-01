@@ -1,0 +1,1 @@
+../../cli/js/lib.deno.window.d.ts
