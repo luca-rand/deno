@@ -223,6 +223,7 @@ impl MainWorker {
       ops::runtime::init(isolate, &state);
       ops::runtime_compiler::init(isolate, &state);
       ops::errors::init(isolate, &state);
+      ops::doc::init(isolate, &state);
       ops::fetch::init(isolate, &state);
       ops::fs::init(isolate, &state);
       ops::fs_events::init(isolate, &state);

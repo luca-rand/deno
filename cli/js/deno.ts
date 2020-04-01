@@ -6,7 +6,7 @@ export {
   readAll,
   readAllSync,
   writeAll,
-  writeAllSync,
+  writeAllSync
 } from "./buffer.ts";
 export { build, OperatingSystem, Arch } from "./build.ts";
 export { chmodSync, chmod } from "./ops/fs/chmod.ts";
@@ -18,9 +18,10 @@ export {
   Diagnostic,
   DiagnosticCategory,
   DiagnosticItem,
-  DiagnosticMessageChain,
+  DiagnosticMessageChain
 } from "./diagnostics.ts";
 export { chdir, cwd } from "./ops/fs/dir.ts";
+export { doc } from "./doc.ts";
 export { applySourceMap, formatDiagnostics } from "./ops/errors.ts";
 export { errors } from "./errors.ts";
 export { FileInfo } from "./file_info.ts";
@@ -36,7 +37,7 @@ export {
   seek,
   seekSync,
   OpenOptions,
-  OpenMode,
+  OpenMode
 } from "./files.ts";
 export { read, readSync, write, writeSync } from "./ops/io.ts";
 export { FsEvent, fsEvents } from "./ops/fs_events.ts";
@@ -57,7 +58,7 @@ export {
   ReadSeeker,
   WriteSeeker,
   ReadWriteCloser,
-  ReadWriteSeeker,
+  ReadWriteSeeker
 } from "./io.ts";
 export { linkSync, link } from "./ops/fs/link.ts";
 export {
@@ -65,7 +66,7 @@ export {
   makeTempDir,
   makeTempFileSync,
   makeTempFile,
-  MakeTempOptions,
+  MakeTempOptions
 } from "./ops/fs/make_temp.ts";
 export { metrics, Metrics } from "./ops/runtime.ts";
 export { mkdirSync, mkdir, MkdirOptions } from "./ops/fs/mkdir.ts";
@@ -76,7 +77,7 @@ export {
   Listener,
   Conn,
   ShutdownMode,
-  shutdown,
+  shutdown
 } from "./net.ts";
 export {
   dir,
@@ -85,14 +86,14 @@ export {
   execPath,
   hostname,
   loadavg,
-  osRelease,
+  osRelease
 } from "./ops/os.ts";
 export {
   permissions,
   PermissionName,
   PermissionState,
   PermissionStatus,
-  Permissions,
+  Permissions
 } from "./permissions.ts";
 export { openPlugin } from "./plugins.ts";
 export { kill } from "./ops/process.ts";
