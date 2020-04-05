@@ -1,3 +1,5 @@
+// Copyright 2018-2020 the Deno authors. All rights reserved. MIT license.
+
 import * as util from "./util.ts";
 import * as docOps from "./ops/doc.ts";
 
@@ -10,7 +12,6 @@ export enum DocNodeKind {
   TypeAlias = "typeAlias",
   Namespace = "namespace"
 }
-
 export interface DocNodeLocation {
   filename: String;
   line: number;
@@ -240,30 +241,25 @@ export interface EnumMemberDef {
 export interface EnumDef {
   members: EnumMemberDef[];
 }
-
 export interface InterfaceMethodDef extends DocNodeShared {
   params: ParamDef[];
   returnType?: TsTypeDef;
 }
-
 export interface InterfacePropertyDef extends DocNodeShared {
   params: ParamDef[];
   computed: boolean;
   optional: boolean;
   tsType?: TsTypeDef;
 }
-
 export interface InterfaceCallSignatureDef extends Omit<DocNodeShared, "name"> {
   params: ParamDef[];
   tsType?: TsTypeDef;
 }
-
 export interface InterfaceDef {
   methods: InterfaceMethodDef[];
   properties: InterfacePropertyDef[];
   callSignatures: InterfaceCallSignatureDef[];
 }
-
 export interface TypeAliasDef {
   tsType: TsTypeDef;
 }
@@ -299,7 +295,6 @@ export type DocNodeNamespace = DocNodeShared & {
   kind: DocNodeKind.Namespace;
   namespaceDef: NamespaceDef;
 };
-
 export type DocNode =
   | DocNodeFunction
   | DocNodeVariable

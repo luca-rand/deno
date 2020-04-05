@@ -137,7 +137,6 @@ declare namespace Deno {
     TypeAlias = "typeAlias",
     Namespace = "namespace"
   }
-  
   export interface DocNodeLocation {
     filename: String;
     line: number;
@@ -367,37 +366,31 @@ declare namespace Deno {
   export interface EnumDef {
     members: EnumMemberDef[];
   }
-  
   export interface InterfaceMethodDef extends DocNodeShared {
     params: ParamDef[];
     returnType?: TsTypeDef;
   }
-  
   export interface InterfacePropertyDef extends DocNodeShared {
     params: ParamDef[];
     computed: boolean;
     optional: boolean;
     tsType?: TsTypeDef;
   }
-  
   export interface InterfaceCallSignatureDef extends Omit<DocNodeShared, "name"> {
     params: ParamDef[];
     tsType?: TsTypeDef;
   }
-  
   export interface InterfaceDef {
     methods: InterfaceMethodDef[];
     properties: InterfacePropertyDef[];
     callSignatures: InterfaceCallSignatureDef[];
   }
-  
   export interface TypeAliasDef {
     tsType: TsTypeDef;
   }
   export interface NamespaceDef {
     elements: DocNode[];
   }
-  
   export type DocNodeFunction = DocNodeShared & {
     kind: DocNodeKind.Function;
     functionDef: FunctionDef;
@@ -426,7 +419,6 @@ declare namespace Deno {
     kind: DocNodeKind.Namespace;
     namespaceDef: NamespaceDef;
   };
-  
   export type DocNode =
     | DocNodeFunction
     | DocNodeVariable
@@ -436,8 +428,14 @@ declare namespace Deno {
     | DocNodeTypeAlias
     | DocNodeNamespace;
   
-  /**
-   * Get a 
+  /** Returns an array of nodes that describe the structure of the file that was
+   * passed to the function. It contains only information required to display
+   * documentation, and is not a full AST.
+   * 
+   *      console.log(Deno.doc("https://deno.land/std/http/server.ts"))
+   * 
+   * Requires `allow-read` permission for any directly or indirectly imported local
+   * modules and `allow-net` permission for any remote modules.
    */
   export function doc(rootName: string): Promise<DocNode[]>;
 
