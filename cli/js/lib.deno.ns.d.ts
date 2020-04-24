@@ -189,9 +189,7 @@ declare namespace Deno {
    */
   export function exit(code?: number): never;
 
-  /** Returns a snapshot of the environment variables at invocation. Changing a
-   * property in the object will set that variable in the environment for the
-   * process. The environment object will only accept `string`s as values.
+  /** Returns a snapshot of the environment variables at invocation.
    *
    *       const myEnv = Deno.env();
    *       console.log(myEnv.SHELL);
@@ -207,11 +205,19 @@ declare namespace Deno {
   /** Retrieve the value of an environment variable. Returns undefined if that
    * key doesn't exist.
    *
-   *       console.log(Deno.env("HOME"));  // e.g. outputs "/home/alice"
-   *       console.log(Deno.env("MADE_UP_VAR"));  // outputs "Undefined"
+   *       console.log(Deno.envGet("HOME"));  // e.g. outputs "/home/alice"
+   *       console.log(Deno.envGet("MADE_UP_VAR"));  // outputs undefined
    *
    * Requires `allow-env` permission. */
-  export function env(key: string): string | undefined;
+  export function envGet(key: string): string | undefined;
+
+  /** Set the value of an environment variable for the current process.
+   *
+   *       Deno.envSet("HOME", "/home/alice");
+   *       Deno.envSet("MADE_UP_VAR", "");
+   *
+   * Requires `allow-env` permission. */
+  export function envSet(key: string, value: string): void;
 
   /** **UNSTABLE** */
   export type DirKind =

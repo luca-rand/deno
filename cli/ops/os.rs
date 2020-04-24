@@ -13,8 +13,8 @@ pub fn init(i: &mut CoreIsolate, s: &State) {
   i.register_op("op_exit", s.stateful_json_op(op_exit));
   i.register_op("op_env", s.stateful_json_op(op_env));
   i.register_op("op_exec_path", s.stateful_json_op(op_exec_path));
-  i.register_op("op_set_env", s.stateful_json_op(op_set_env));
-  i.register_op("op_get_env", s.stateful_json_op(op_get_env));
+  i.register_op("op_env_set", s.stateful_json_op(op_env_set));
+  i.register_op("op_env_get", s.stateful_json_op(op_env_get));
   i.register_op("op_get_dir", s.stateful_json_op(op_get_dir));
   i.register_op("op_hostname", s.stateful_json_op(op_hostname));
   i.register_op("op_loadavg", s.stateful_json_op(op_loadavg));
@@ -96,7 +96,7 @@ struct SetEnv {
   value: String,
 }
 
-fn op_set_env(
+fn op_env_set(
   state: &State,
   args: Value,
   _zero_copy: Option<ZeroCopyBuf>,
@@ -122,7 +122,7 @@ struct GetEnv {
   key: String,
 }
 
-fn op_get_env(
+fn op_env_get(
   state: &State,
   args: Value,
   _zero_copy: Option<ZeroCopyBuf>,

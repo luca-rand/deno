@@ -11,14 +11,15 @@ unitTest({ perms: { env: true } }, function envSuccess(): void {
   const env = Deno.env();
   assert(env !== null);
   // eslint-disable-next-line @typescript-eslint/camelcase
-  env.test_var = "Hello World";
+  const val = "Hello World";
+  Deno.envSet("test_var", "Hello World");
   const newEnv = Deno.env();
-  assertEquals(env.test_var, newEnv.test_var);
-  assertEquals(Deno.env("test_var"), env.test_var);
+  assertEquals(newEnv.test_var, val);
+  assertEquals(Deno.envGet("test_var"), val);
 });
 
 unitTest({ perms: { env: true } }, function envNotFound(): void {
-  const r = Deno.env("env_var_does_not_exist!");
+  const r = Deno.envGet("env_var_does_not_exist!");
   assertEquals(r, undefined);
 });
 
@@ -37,7 +38,7 @@ unitTest(function envPermissionDenied1(): void {
 unitTest(function envPermissionDenied2(): void {
   let err;
   try {
-    Deno.env("PATH");
+    Deno.envGet("PATH");
   } catch (e) {
     err = e;
   }
@@ -62,7 +63,7 @@ unitTest(
     ): Promise<void> => {
       const src = `
       console.log(
-        ${JSON.stringify(Object.keys(expectedEnv))}.map(k => Deno.env(k))
+        ${JSON.stringify(Object.keys(expectedEnv))}.map(k => Deno.envGet(k))
       )`;
       const proc = Deno.run({
         cmd: [Deno.execPath(), "eval", src],
@@ -79,8 +80,8 @@ unitTest(
       proc.close();
     };
 
-    assertEquals(Deno.env("path"), Deno.env("PATH"));
-    assertEquals(Deno.env("Path"), Deno.env("PATH"));
+    assertEquals(Deno.envGet("path"), Deno.envGet("PATH"));
+    assertEquals(Deno.envGet("Path"), Deno.envGet("PATH"));
 
     // Check 'foo', 'Foo' and 'Foo' are case folded.
     await checkChildEnv({ foo: "X" }, { foo: "X", Foo: "X", FOO: "X" });

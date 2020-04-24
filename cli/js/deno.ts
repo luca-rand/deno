@@ -80,6 +80,8 @@ export {
 export {
   dir,
   env,
+  envGet,
+  envSet,
   exit,
   execPath,
   hostname,
